@@ -15,7 +15,7 @@
     "dev": "node scripts/dev.js",
     "build": "next build",
     "build:raw": "next build",
-    "build:cloudflare": "npx @cloudflare/next-on-pages",
+    "build:cloudflare": "next build && npx @cloudflare/next-on-pages",
     "preview:cloudflare": "npm run build:cloudflare && wrangler pages dev .vercel/output/static",
     "start": "next start",
     "lint": "next lint",

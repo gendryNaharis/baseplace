@@ -76,16 +76,9 @@ Cloudflare Pages'da Supabase real-time bağlantıları çalışmalı, ancak:
 
 Alternatif çözümler:
 
-#### Seçenek 1: Cloudflare Workers Cron Triggers (Önerilen)
+#### Seçenek 1: Cloudflare Workers Cron Triggers
 
-`wrangler.toml` dosyasına ekleyin:
-
-```toml
-[triggers]
-crons = ["*/10 * * * *"]
-```
-
-Ancak bu durumda ayrı bir Cloudflare Worker oluşturmanız gerekir.
+⚠️ **Not**: Bu seçenek Pages için değil, ayrı bir Worker gerektiriyor. Yeni başlayanlar için Seçenek 2 önerilir.
 
 #### Seçenek 2: Harici Cron Servisi
 
