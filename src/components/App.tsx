@@ -4,14 +4,17 @@ import { useEffect } from "react";
 import { useMiniApp } from "@neynar/react";
 import { Header } from "~/components/ui/Header";
 import { Footer } from "~/components/ui/Footer";
-import { HomeTab, ActionsTab, ContextTab, WalletTab } from "~/components/ui/tabs";
+import { ContextTab, WalletTab } from "~/components/ui/tabs";
 import { USE_WALLET } from "~/lib/constants";
 import { useNeynarUser } from "../hooks/useNeynarUser";
+import { PixelCanvas } from "~/components/ui/PixelCanvas";
+import { CanvasTimer } from "~/components/ui/CanvasTimer";
+import { NFTGallery } from "~/components/ui/NFTGallery";
 
 // --- Types ---
 export enum Tab {
   Home = "home",
-  Actions = "actions",
+  Gallery = "gallery",
   Context = "context",
   Wallet = "wallet",
 }
@@ -49,9 +52,7 @@ export interface AppProps {
  * <App title="My Mini App" />
  * ```
  */
-export default function App(
-  { title }: AppProps = { title: "Neynar Starter Kit" }
-) {
+export default function App() {
   // --- Hooks ---
   const {
     isSDKLoaded,
@@ -93,6 +94,7 @@ export default function App(
   // --- Render ---
   return (
     <div
+      className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100"
       style={{
         paddingTop: context?.client.safeAreaInsets?.top ?? 0,
         paddingBottom: context?.client.safeAreaInsets?.bottom ?? 0,
@@ -104,13 +106,23 @@ export default function App(
       <Header neynarUser={neynarUser} />
 
       {/* Main content and footer should be centered */}
-      <div className="container py-2 pb-20">
+      <div className="container py-4 pb-20">
         {/* Main title */}
-        <h1 className="text-2xl font-bold text-center mb-4">{title}</h1>
+        <div className="text-center mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 mb-1">BasePlace</h1>
+          <p className="text-sm text-gray-600">
+            Every 6 hours a new canvas. Create together, mint as NFT.
+          </p>
+        </div>
 
         {/* Tab content rendering */}
-        {currentTab === Tab.Home && <HomeTab />}
-        {currentTab === Tab.Actions && <ActionsTab />}
+        {currentTab === Tab.Home && (
+          <div className="space-y-4">
+            <CanvasTimer />
+            <PixelCanvas />
+          </div>
+        )}
+        {currentTab === Tab.Gallery && <NFTGallery />}
         {currentTab === Tab.Context && <ContextTab />}
         {currentTab === Tab.Wallet && <WalletTab />}
 
