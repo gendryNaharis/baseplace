@@ -8,10 +8,13 @@ Cloudflare Pages dashboard'unda şu ayarları kullanın:
 
 | Ayar | Değer |
 |------|-------|
-| **Framework preset** | `Next.js` |
-| **Build command** | `npx @cloudflare/next-on-pages` |
+| **Framework preset** | `Next.js` (veya `None`) |
+| **Build command** | `npm run build && npx @cloudflare/next-on-pages` |
 | **Build output directory** | `.vercel/output/static` |
 | **Production branch** | `main` |
+| **Root directory** | `/` (boş bırakabilirsiniz) |
+
+⚠️ **Not**: Framework preset'i `None` olarak da ayarlayabilirsiniz, çünkü custom build command kullanıyoruz.
 
 ## 📝 Detaylı Adımlar
 
@@ -23,9 +26,15 @@ Dropdown'dan **Next.js** seçin.
 
 ### 2. Build Command
 ```bash
-npx @cloudflare/next-on-pages
+npm run build && npx @cloudflare/next-on-pages
 ```
-Bu komut Next.js uygulamanızı Cloudflare Workers için optimize eder.
+İlk önce Next.js build'i çalışır, sonra Cloudflare Pages için optimize edilir.
+
+**Alternatif** (daha basit):
+```bash
+npm run build:cloudflare
+```
+package.json'da tanımlı kısayol komutu.
 
 ### 3. Build Output Directory
 ```
